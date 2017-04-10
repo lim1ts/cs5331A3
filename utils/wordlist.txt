@@ -940,6 +940,7 @@ index3
 index_01
 index_adm
 index_admin
+index_test
 indexes
 industries
 industry
@@ -1750,6 +1751,7 @@ trans
 transactions
 transfer
 transformations
+translationManager
 transparent
 transport
 trap
