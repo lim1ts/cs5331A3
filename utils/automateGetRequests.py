@@ -2,7 +2,6 @@ import json
 import requests
 from inspect import BlockFinder
 import inspect
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 class Human():
     strlist = []
@@ -37,7 +36,6 @@ class Human():
         data = package[url[0]][1]
         data_str = "&".join("%s=%s" % (k,v) for k,v in data.items())
 
-        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
         result = requests.get(url[0], verify = False, params = data_str)
         if self.lookfor in result.content:
             return (url[0], self.currentExploitCode, result.url)
