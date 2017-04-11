@@ -1,0 +1,2 @@
+def preamble(jar):
+    jar.set("osclass", "cokag8kh4sh0lgma6kii9meac1")

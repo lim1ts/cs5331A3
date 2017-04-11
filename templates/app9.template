@@ -1,0 +1,2 @@
+def preamble(jar):
+    jar.set("PHPSESSID", "laaucefkm4b4c6k6g9s25cvkm5")

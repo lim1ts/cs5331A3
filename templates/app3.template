@@ -1,0 +1,4 @@
+def preamble(jar):
+    login_url = "http://app1.com/admin/index.php?page=login"
+    data = {"adminname": "admin", "password": "admin"}
+    r = requests.post(login_url, data=data, cookies=jar)
