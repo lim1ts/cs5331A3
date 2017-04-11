@@ -1,0 +1,5 @@
+[{"app1":"admin,admin"},
+{"app3":"admin,admin"},
+{"app5":"admin,admin"},
+{"app7":"admin,admin"},
+{"app9":"admin,admin"}]
