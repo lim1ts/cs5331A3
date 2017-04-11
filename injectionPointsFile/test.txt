@@ -6,3 +6,15 @@
 {"https://app3.com/windows/hotpatch.php": [{"type": "GET"}, {"files": ["\" files \""], "get": ["\" get \""], "server": ["\" server"], "cookie": ["\" cookie \""], "file": ["\" file \""], "post": ["\" post \""]}]}
 {"https://app3.com/windows/code.php": [{"type": "GET"}, {"lines": ["\" lines"], "file": ["\" file \""]}]}
 {"https://app3.com/windows/exploit.php": [{"type": "GET"}, {"files": ["\" files \""], "get": ["\" get \""], "server": ["\" server"], "cookie": ["\" cookie \""], "file": ["\" file \""], "post": ["\" post \""]}]}
+{"https://app3.com/js/script.js": [{"type": "GET"}, {}]}
+{"https://app3.com/js/exploit.js": [{"type": "GET"}, {}]}
+{"https://app3.com/js/hotpatch.js": [{"type": "GET"}, {}]}
+{"https://app3.com/js/netron.js": [{"type": "GET"}, {}]}
+{"https://app7.com/oc-includes/osclass/assets/js/jquery.min.js": [{"type": "GET"}, {}]}
+{"https://app7.com/oc-content/themes/bender/js/fancybox/jquery.fancybox.pack.js": [{"type": "GET"}, {}]}
+{"https://app7.com/oc-includes/osclass/assets/js/date.js": [{"type": "GET"}, {}]}
+{"https://app7.com/oc-includes/osclass/assets/js/fineuploader/jquery.fineuploader.min.js": [{"type": "GET"}, {}]}
+{"https://app7.com/oc-includes/osclass/assets/js/jquery-ui.min.js": [{"type": "GET"}, {}]}
+{"https://app7.com/oc-content/themes/bender/js/global.js": [{"type": "GET"}, {}]}
+{"https://app5.com/www/js/scripts.php": [{"type": "GET"}, {"load": ["EfrontScripts,scriptaculous/prototype,scriptaculous/scriptaculous,scriptaculous/effects,prototip/prototip,efront_ajax,includes/events"], "build": ["10653"]}]}
+{"https://app5.com/www/js/scripts.php": [{"type": "GET"}, {"load": ["includes/catalog"], "build": ["10653"]}]}

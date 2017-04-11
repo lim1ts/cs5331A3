@@ -2,6 +2,7 @@ import json
 import requests
 from inspect import BlockFinder
 import inspect
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 class Human():
     strlist = []
@@ -36,6 +37,7 @@ class Human():
         data = package[url[0]][1]
         data_str = "&".join("%s=%s" % (k,v) for k,v in data.items())
 
+        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
         result = requests.get(url[0], verify = False, params = data_str)
         if self.lookfor in result.content:
             return (url[0], self.currentExploitCode, result.url)
@@ -51,8 +53,6 @@ class FileGenerator():
         self.outfile.write(str(tupleCode)+"\n")
     def closeFile(self):
         self.outfile.close()
-
-
 
 def oneLineSetAndGo(injectionPointsFile, exploitCodesFile, expectedResultToSee):
     pq = Human()
@@ -76,8 +76,9 @@ def oneLineSetAndGo(injectionPointsFile, exploitCodesFile, expectedResultToSee):
 
 
 def main():
-    oneLineSetAndGo("../injectionPointsFile/test.txt", "../exploits/directoryTraversal.txt", "root")
-    oneLineSetAndGo("../injectionPointsFile/test.txt", "../exploits/dataInjection.txt", "192.168.56.101")
+
+    oneLineSetAndGo("../injectionPointsFile/test.txt", "../exploits/directoryTraversal.txt", "root:x:0:0")
+    oneLineSetAndGo("../injectionPointsFile/test.txt", "../exploits/dataInjection.txt", "Pawned")
     # response = requests.get("https://app3.com/js/script.js", verify = False)
     # result = response.content
     # for ch in ['\t','\n']:
