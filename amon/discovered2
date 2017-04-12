@@ -1,0 +1,4 @@
+http://app10.com/search.php?cat_id=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:&cmd=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:&mod_id=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:
+http://app10.com/task.php?i=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:&m=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:&t=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:&mod=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:
+http://app10.com/page.php?pid=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:
+https://app6.com/index.php?lang=            if r.status_code == 200 and "1d7eec3faf7e008f1934398b0ed8318c" in r.text:
